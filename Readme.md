@@ -38,4 +38,3 @@ Para interromper, pressione `Ctrl+C` e execute `docker compose down`.
    python run.py
    ```
 5. Acesse `http://localhost:5000/` para verificar se a API está ativa.
-
