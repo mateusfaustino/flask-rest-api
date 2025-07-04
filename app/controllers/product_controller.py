@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, abort
 from sqlalchemy import or_
 from app.models import Product
 
@@ -53,3 +53,13 @@ def list_products():
         pages=pagination.pages,
         per_page=pagination.per_page,
     )
+
+
+@product_bp.route("/<int:product_id>", methods=["GET"])
+def get_product(product_id):
+    """Retrieve a single product by its ID."""
+    product = Product.query.get(product_id)
+    if product is None:
+        abort(404, description="Product not found")
+
+    return jsonify(id=product.id, name=product.name, price=float(product.price))
