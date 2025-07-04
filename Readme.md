@@ -20,6 +20,11 @@ Este projeto fornece uma API REST utilizando Flask e MySQL. A maneira mais simpl
    O phpMyAdmin poderá ser acessado em `http://localhost:8080/`.
    O MySQL escutará na porta `3308` do hospedeiro.
 
+## Documentação da API
+
+Após subir os contêineres, acesse `http://localhost:5000/apidocs/` para
+visualizar uma documentação interativa gerada pelo Swagger.
+
 Para interromper, pressione `Ctrl+C` e execute `docker compose down`.
 
 ## Executando sem Docker (opcional)

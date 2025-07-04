@@ -8,7 +8,60 @@ product_bp = Blueprint("products", __name__, url_prefix="/products")
 
 @product_bp.route("/", methods=["GET"])
 def list_products():
-    """List products with optional pagination and filtering."""
+    """List products with optional pagination and filtering.
+    ---
+    parameters:
+      - name: page
+        in: query
+        type: integer
+        required: false
+        description: Page number
+        default: 1
+      - name: per_page
+        in: query
+        type: integer
+        required: false
+        description: Items per page
+        default: 10
+      - name: search
+        in: query
+        type: string
+        required: false
+        description: Search by id or name
+      - name: name
+        in: query
+        type: string
+        required: false
+        description: Filter by product name
+      - name: min_price
+        in: query
+        type: number
+        required: false
+        description: Minimum price
+      - name: max_price
+        in: query
+        type: number
+        required: false
+        description: Maximum price
+    responses:
+      200:
+        description: Paginated list of products
+        schema:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+            total:
+              type: integer
+            page:
+              type: integer
+            pages:
+              type: integer
+            per_page:
+              type: integer
+    """
     page = request.args.get("page", default=1, type=int)
     per_page = request.args.get("per_page", default=10, type=int)
 
@@ -58,7 +111,22 @@ def list_products():
 
 @product_bp.route("/", methods=["POST"])
 def create_product():
-    """Create a new product."""
+    """Create a new product.
+    ---
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    responses:
+      201:
+        description: Product created
+        schema:
+          $ref: '#/components/schemas/Product'
+      400:
+        description: Validation error
+    """
     data = request.get_json() or {}
 
     name = data.get("name")
@@ -79,7 +147,22 @@ def create_product():
 
 @product_bp.route("/<int:product_id>", methods=["GET"])
 def get_product(product_id):
-    """Retrieve a single product by its ID."""
+    """Retrieve a single product by its ID.
+    ---
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+        description: Identifier of the product
+    responses:
+      200:
+        description: Product details
+        schema:
+          $ref: '#/components/schemas/Product'
+      404:
+        description: Product not found
+    """
     product = Product.query.get(product_id)
     if product is None:
         abort(404, description="Product not found")
@@ -89,7 +172,28 @@ def get_product(product_id):
 
 @product_bp.route("/<int:product_id>", methods=["PUT"])
 def update_product(product_id):
-    """Update an existing product."""
+    """Update an existing product.
+    ---
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+        description: Identifier of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    responses:
+      200:
+        description: Updated product
+        schema:
+          $ref: '#/components/schemas/Product'
+      404:
+        description: Product not found
+    """
     product = Product.query.get(product_id)
     if product is None:
         abort(404, description="Product not found")
@@ -112,7 +216,20 @@ def update_product(product_id):
 
 @product_bp.route("/<int:product_id>", methods=["DELETE"])
 def delete_product(product_id):
-    """Delete a product by its ID."""
+    """Delete a product by its ID.
+    ---
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+        description: Identifier of the product
+    responses:
+      204:
+        description: Product deleted
+      404:
+        description: Product not found
+    """
     product = Product.query.get(product_id)
     if product is None:
         abort(404, description="Product not found")
