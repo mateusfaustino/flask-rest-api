@@ -37,3 +37,24 @@ flask --app app:create_app db migrate -m "Migration message"
 # Apply migrations to the database
 flask --app app:create_app db upgrade
 ```
+
+## Seeding sample data
+
+Run the `seed.py` script to populate the database with random products. If the
+containers are already running you can execute:
+
+```bash
+docker compose exec app python seed.py
+```
+
+Alternatively, start a one-off container to run the script:
+
+```bash
+docker compose run --rm app python seed.py
+```
+
+If running the project without Docker, simply call:
+
+```bash
+python seed.py
+```
