@@ -23,7 +23,9 @@ The MySQL server listens on host port `3308`.
 ## Database migrations
 
 Use `Flask-Migrate` to manage schema changes. Set the `FLASK_APP` variable to
-`app:create_app` and run the commands below.
+`app:create_app` and ensure the models module is imported inside the application
+factory (for example `from . import models`). With that in place, run the
+commands below.
 
 ```bash
 # Initialise the migrations folder (run once)

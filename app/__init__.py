@@ -17,6 +17,10 @@ def create_app():
     # init extensions
     CORS(app)
     db.init_app(app)
+
+    # Import models so they are registered with SQLAlchemy before migrations
+    from . import models  # noqa: F401
+
     migrate.init_app(app, db)
 
     # register blueprints

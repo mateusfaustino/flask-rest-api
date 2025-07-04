@@ -42,7 +42,9 @@ Para interromper, pressione `Ctrl+C` e execute `docker compose down`.
 ## Rodando as migrações
 
 O controle de versões do banco é feito com o *Flask-Migrate*. Após instalar as
-dependências e definir `FLASK_APP=app:create_app`, execute:
+dependências e definir `FLASK_APP=app:create_app`, garanta que o módulo de
+modelos seja importado na função `create_app` (por exemplo `from . import models`).
+Depois disso, execute:
 
 ```bash
 # primeira execução
