@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 from sqlalchemy import or_
+from app import db
 from app.models import Product
 
 product_bp = Blueprint("products", __name__, url_prefix="/products")
@@ -52,6 +53,27 @@ def list_products():
         page=pagination.page,
         pages=pagination.pages,
         per_page=pagination.per_page,
+    )
+
+
+@product_bp.route("/", methods=["POST"])
+def create_product():
+    """Create a new product."""
+    data = request.get_json() or {}
+
+    name = data.get("name")
+    price = data.get("price")
+
+    if name is None or price is None:
+        abort(400, description="'name' and 'price' are required fields")
+
+    product = Product(name=name, price=price)
+    db.session.add(product)
+    db.session.commit()
+
+    return (
+        jsonify(id=product.id, name=product.name, price=float(product.price)),
+        201,
     )
 
 
