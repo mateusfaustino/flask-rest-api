@@ -70,3 +70,15 @@ alongside a free text `search` that checks the product `id` and `name` fields.
 
 Use `GET /products/<id>` to fetch the details for a specific product. The
 response body will contain the product `id`, `name` and `price`.
+
+## Creating a product
+
+Send a JSON payload to `POST /products` with the fields `name` and `price`:
+
+```bash
+curl -X POST http://localhost:5000/products \
+  -H "Content-Type: application/json" \
+  -d '{"name": "New Shirt", "price": 99.90}'
+```
+
+The response will include the created product with its generated `id`.
