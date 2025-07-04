@@ -58,3 +58,10 @@ If running the project without Docker, simply call:
 ```bash
 python seed.py
 ```
+
+## Listing products
+
+The `/products` endpoint supports optional pagination and filtering. Use the
+`page` and `per_page` query parameters to control pagination (defaults are `1`
+and `10`). Filtering by `name`, `min_price` and `max_price` can also be applied
+alongside a free text `search` that checks the product `id` and `name` fields.
