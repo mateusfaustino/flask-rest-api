@@ -65,3 +65,8 @@ The `/products` endpoint supports optional pagination and filtering. Use the
 `page` and `per_page` query parameters to control pagination (defaults are `1`
 and `10`). Filtering by `name`, `min_price` and `max_price` can also be applied
 alongside a free text `search` that checks the product `id` and `name` fields.
+
+## Retrieving a single product
+
+Use `GET /products/<id>` to fetch the details for a specific product. The
+response body will contain the product `id`, `name` and `price`.
