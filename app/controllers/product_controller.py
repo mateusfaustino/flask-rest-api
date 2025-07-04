@@ -85,3 +85,26 @@ def get_product(product_id):
         abort(404, description="Product not found")
 
     return jsonify(id=product.id, name=product.name, price=float(product.price))
+
+
+@product_bp.route("/<int:product_id>", methods=["PUT"])
+def update_product(product_id):
+    """Update an existing product."""
+    product = Product.query.get(product_id)
+    if product is None:
+        abort(404, description="Product not found")
+
+    data = request.get_json() or {}
+
+    name = data.get("name")
+    price = data.get("price")
+
+    if name is not None:
+        product.name = name
+
+    if price is not None:
+        product.price = price
+
+    db.session.commit()
+
+    return jsonify(id=product.id, name=product.name, price=float(product.price))

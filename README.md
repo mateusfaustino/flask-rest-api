@@ -82,3 +82,14 @@ curl -X POST http://localhost:5000/products \
 ```
 
 The response will include the created product with its generated `id`.
+
+## Updating a product
+
+Send a JSON payload to `PUT /products/<id>` with any fields you wish to change.
+Omitted fields will keep their existing values.
+
+```bash
+curl -X PUT http://localhost:5000/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Updated Shirt", "price": 79.90}'
+```
