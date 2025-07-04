@@ -46,21 +46,23 @@ def list_products():
     responses:
       200:
         description: Paginated list of products
-        schema:
-          type: object
-          properties:
-            items:
-              type: array
-              items:
-                $ref: '#/components/schemas/Product'
-            total:
-              type: integer
-            page:
-              type: integer
-            pages:
-              type: integer
-            per_page:
-              type: integer
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                pages:
+                  type: integer
+                per_page:
+                  type: integer
     """
     page = request.args.get("page", default=1, type=int)
     per_page = request.args.get("per_page", default=10, type=int)
@@ -122,8 +124,10 @@ def create_product():
     responses:
       201:
         description: Product created
-        schema:
-          $ref: '#/components/schemas/Product'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
       400:
         description: Validation error
     """
@@ -158,8 +162,10 @@ def get_product(product_id):
     responses:
       200:
         description: Product details
-        schema:
-          $ref: '#/components/schemas/Product'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
       404:
         description: Product not found
     """
@@ -189,8 +195,10 @@ def update_product(product_id):
     responses:
       200:
         description: Updated product
-        schema:
-          $ref: '#/components/schemas/Product'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
       404:
         description: Product not found
     """
