@@ -20,6 +20,12 @@ phpMyAdmin will be accessible at `http://localhost:8080/`.
 
 The MySQL server listens on host port `3308`.
 
+## API Documentation
+
+Interactive Swagger documentation is available once the containers are
+running. Access `http://localhost:5000/apidocs/` in your browser to explore
+the endpoints and their schemas.
+
 ## Database migrations
 
 Use `Flask-Migrate` to manage schema changes. Set the `FLASK_APP` variable to
