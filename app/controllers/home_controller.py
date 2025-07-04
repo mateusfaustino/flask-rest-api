@@ -10,11 +10,13 @@ def index():
     responses:
       200:
         description: API status message
-        schema:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Hello World
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Hello World
     """
     return jsonify(message="Hello World")
