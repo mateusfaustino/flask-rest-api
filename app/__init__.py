@@ -25,6 +25,8 @@ def create_app():
 
     # register blueprints
     from .controllers.home_controller import home_bp
+    from .controllers.product_controller import product_bp
     app.register_blueprint(home_bp)
+    app.register_blueprint(product_bp)
 
     return app
