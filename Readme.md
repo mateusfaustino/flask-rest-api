@@ -38,3 +38,19 @@ Para interromper, pressione `Ctrl+C` e execute `docker compose down`.
    python run.py
    ```
 5. Acesse `http://localhost:5000/` para verificar se a API está ativa.
+
+## Rodando as migrações
+
+O controle de versões do banco é feito com o *Flask-Migrate*. Após instalar as
+dependências e definir `FLASK_APP=app:create_app`, execute:
+
+```bash
+# primeira execução
+flask --app app:create_app db init
+
+# gerar um novo arquivo de migração
+flask --app app:create_app db migrate -m "Mensagem"
+
+# aplicar as migrações ao banco
+flask --app app:create_app db upgrade
+```
