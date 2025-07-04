@@ -108,3 +108,16 @@ def update_product(product_id):
     db.session.commit()
 
     return jsonify(id=product.id, name=product.name, price=float(product.price))
+
+
+@product_bp.route("/<int:product_id>", methods=["DELETE"])
+def delete_product(product_id):
+    """Delete a product by its ID."""
+    product = Product.query.get(product_id)
+    if product is None:
+        abort(404, description="Product not found")
+
+    db.session.delete(product)
+    db.session.commit()
+
+    return "", 204

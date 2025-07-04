@@ -93,3 +93,13 @@ curl -X PUT http://localhost:5000/products/1 \
   -H "Content-Type: application/json" \
   -d '{"name": "Updated Shirt", "price": 79.90}'
 ```
+
+## Deleting a product
+
+Send a `DELETE` request to `/products/<id>` specifying the product identifier in
+the URL. A successful deletion will return status code `204` with an empty
+response body.
+
+```bash
+curl -X DELETE http://localhost:5000/products/1
+```
